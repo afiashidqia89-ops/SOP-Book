@@ -1,0 +1,2 @@
+# Arsitektur
+Mobile Flutter menggunakan cache lokal dan antrean offline. Web Next.js dipakai Document Controller dan administrator. NestJS menyediakan REST API. PostgreSQL menyimpan metadata, sedangkan file dokumen diarahkan ke MinIO/S3 pada tahap berikutnya. Tidak ada modul kuis.
