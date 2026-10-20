@@ -1,1 +1,0 @@
-const API=process.env.NEXT_PUBLIC_API_URL||"http://localhost:3001/api/v1"; export async function getDocuments(){const r=await fetch(`${API}/documents`,{cache:"no-store"});if(!r.ok)return [];return r.json();}

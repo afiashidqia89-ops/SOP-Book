@@ -1,2 +1,0 @@
-import 'package:dio/dio.dart';
-class ApiClient { ApiClient():dio=Dio(BaseOptions(baseUrl:const String.fromEnvironment('API_BASE_URL',defaultValue:'http://10.0.2.2:3001/api/v1'),connectTimeout:const Duration(seconds:20))); final Dio dio; Future<List<dynamic>> documents() async => (await dio.get('/documents')).data as List<dynamic>; Future<Map<String,dynamic>> checkSync(String? lastSyncAt) async => Map<String,dynamic>.from((await dio.post('/sync/check',data:{'lastSyncAt':lastSyncAt})).data); }
