@@ -1,1 +1,0 @@
-import "./globals.css"; export const metadata={title:"SOP Admin",description:"Manajemen SOP dan Instruksi Kerja"}; export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="id"><body>{children}</body></html>}
