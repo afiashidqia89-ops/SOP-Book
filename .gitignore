@@ -1,0 +1,36 @@
+# === Node / Backend / Web ===
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.env
+.env.local
+.env.*.local
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# === Next.js ===
+.next/
+out/
+next-env.d.ts
+
+# === Android ===
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+apps/android/app/build/
+apps/android/build/
+apps/android/.kotlin/
+
+# === OS / Editor ===
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/*
+!.vscode/launch.json
