@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Dokumentasi Proyek
+    url: https://github.com/<username>/sop-sawit/blob/main/docs/panduan-setup.md
+    about: Baca dulu sebelum membuat issue — banyak pertanyaan setup sudah dijawab di sini.
+  - name: 🔒 Laporan Keamanan
+    url: https://github.com/<username>/sop-sawit/blob/main/SECURITY.md
+    about: Celah keamanan JANGAN dilaporkan lewat issue — ikuti petunjuk di SECURITY.md.
