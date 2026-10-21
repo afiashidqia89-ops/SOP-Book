@@ -1,0 +1,35 @@
+LISENSI PERANGKAT LUNAK INTERNAL — e-SOP Sawit
+================================================
+
+Copyright (c) 2025 [Nama Perusahaan Perkebunan]
+
+Seluruh hak cipta dilindungi.
+
+Perangkat lunak ini, termasuk seluruh kode sumber (backend, web admin,
+aplikasi Android), dokumentasi, dan konfigurasinya, merupakan milik
+[Nama Perusahaan Perkebunan] dan DITUJUKAN HANYA UNTUK KEGUNAAN INTERNAL
+perusahaan.
+
+DILARANG:
+1. Menyalin, mendistribusikan, atau membagikan kode sumber kepada pihak
+   luar tanpa izin tertulis dari manajemen.
+2. Menggunakan kode sumber untuk kepentingan komersial di luar lingkup
+   perusahaan.
+3. Mengunggah ulang (re-upload) repositori ini ke layanan publik
+   (GitHub publik, GitLab publik, dsb.) tanpa persetujuan.
+
+DIIZINKAN:
+1. Menggunakan, memodifikasi, dan menyebarkan kode di antara karyawan
+   dalam lingkup pekerjaan.
+2. Membuat salinan backup internal (server Git perusahaan, drive
+   internal perusahaan).
+
+Konten SOP / Instruksi Kerja yang dikelola melalui sistem ini adalah
+dokumen internal perusahaan dan tunduk pada kebijakan kerahasiaan
+perusahaan.
+
+---
+
+CATATAN: Jika suatu saat perusahaan memutuskan untuk merilis kode ini
+sebagai open source, ganti file ini dengan lisensi MIT/Apache-2.0 dan
+hilangkan seluruh SOP internal dari repositori sebelum dipublikasikan.

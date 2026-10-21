@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">e-SOP Sawit</string>
+    <string name="offline_banner">Mode Offline — menampilkan SOP yang tersimpan di perangkat</string>
+    <string name="sync_success">SOP diperbarui dari server</string>
+    <string name="sync_no_connection">Tidak ada koneksi — data offline tetap tersedia</string>
+</resources>

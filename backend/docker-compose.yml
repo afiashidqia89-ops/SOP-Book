@@ -1,0 +1,31 @@
+# docker compose up -d --build  → backend + PostgreSQL siap pakai
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: sopsawit
+      POSTGRES_PASSWORD: sopsawit
+      POSTGRES_DB: sopsawit
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    depends_on:
+      - db
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgresql://sopsawit:sopsawit@db:5432/sopsawit?schema=public
+      JWT_SECRET: "ganti-secret-ini-di-produksi-minimal-32-karakter"
+      CORS_ORIGIN: http://localhost:3000
+    volumes:
+      - uploads:/app/uploads
+    ports:
+      - "3001:3001"
+    command: sh -c "npx prisma db push && npx prisma db seed && node src/index.js"
+
+volumes:
+  pgdata:
+  uploads:

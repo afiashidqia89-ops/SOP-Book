@@ -1,0 +1,26 @@
+# Render Blueprint — deploy backend e-SOP Sawit 1-klik dari GitHub
+# Render otomatis membaca file ini: New + → Blueprint → pilih repo ini.
+# Dapatkan DATABASE_URL gratis dari https://neon.tech (lihat docs/panduan-100-online.md).
+
+services:
+  - type: web
+    name: esop-sawit-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci && npx prisma generate
+    startCommand: npx prisma db push --skip-generate && npx prisma db seed && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false # tempel connection string Neon (postgresql://...neon.tech/...)
+      - key: JWT_SECRET
+        generateValue: true # Render membuat acak otomatis (aman)
+      - key: JWT_EXPIRES_IN
+        value: 8h
+      - key: CORS_ORIGIN
+        sync: false # isi dengan URL web admin Vercel, contoh: https://esop-sawit.vercel.app
+      - key: MAX_FILE_SIZE
+        value: 26214400
+      - key: NODE_VERSION
+        value: "20"

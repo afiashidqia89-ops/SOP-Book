@@ -1,0 +1,93 @@
+// e-SOP Sawit — Prisma Schema
+// PostgreSQL — model data inti: user multi-role, kategori, dokumen SOP, log sync
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Level hak akses, dari tertinggi ke terendah
+enum Role {
+  SUPERADMIN // Admin pusat (mis. divisi HGTS/IT)
+  MANAGER    // Manager / AED — persetujuan & publikasi SOP
+  ASSISTANT  // Asisten Kepala Bagian — input & revisi SOP
+  FOREMAN    // Mandor / Kru Harvesting — baca & sync
+  WORKER     // Pekerja — baca SOP
+}
+
+enum SopStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  nik       String     @unique // Nomor Induk Karyawan, dipakai untuk login
+  name      String
+  password  String // bcrypt hash
+  role      Role       @default(WORKER)
+  division  String? // divisi kerja (mis. "Panen", "Pemupukan")
+  estate    String? // unit kebun / afdeling (mis. "Afd. I")
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  sops      SopDocument[] @relation("SopAuthor")
+  syncLogs  SyncLog[]
+
+  @@map("users")
+}
+
+model Category {
+  id           Int           @id @default(autoincrement())
+  code         String        @unique // PN, PM, SP, IR, QM, K3, ...
+  name         String // Panen, Pemupukan, Spraying, Irigasi, Quality Mgmt, K3
+  description  String?
+  sopDocuments SopDocument[]
+
+  @@map("categories")
+}
+
+model SopDocument {
+  id          Int        @id @default(autoincrement())
+  code        String     @unique // SOP-PN-001
+  title       String
+  description String?
+  categoryId  Int
+  category    Category   @relation(fields: [categoryId], references: [id])
+  version     Int        @default(1) // naik otomatis tiap revisi
+  status      SopStatus  @default(DRAFT)
+  publishedAt DateTime?
+  fileName    String? // nama asli file yang diunggah
+  fileUrl     String? // path logis: uploads/sop/xxx.pdf (fallback baca disk)
+  fileSize    Int? // byte
+  mimeType    String? // selalu application/pdf
+  fileData    Bytes? // ISI PDF disimpan langsung di database — wajib untuk hosting dengan disk sementara (Render/Railway/Koyeb free tier)
+  checksum    String? // SHA-256 — verifikasi integritas saat sync offline
+  authorId    Int?
+  author      User?      @relation("SopAuthor", fields: [authorId], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  syncLogs    SyncLog[]
+
+  @@index([status, updatedAt])
+  @@map("sop_documents")
+}
+
+model SyncLog {
+  id       Int          @id @default(autoincrement())
+  userId   Int?
+  user     User?        @relation(fields: [userId], references: [id])
+  sopId    Int?
+  sop      SopDocument? @relation(fields: [sopId], references: [id])
+  deviceId String? // identifier perangkat Android
+  action   String // SYNC_MANIFEST | DOWNLOAD | SYNC_OK
+  syncedAt DateTime     @default(now())
+
+  @@index([sopId, syncedAt])
+  @@map("sync_logs")
+}
