@@ -1,0 +1,28 @@
+# EditorConfig — konsistensi format lintas editor & lintas 3 codebase
+# Aktifkan plugin EditorConfig di VS Code / Android Studio / JetBrains IDE
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Node.js / JavaScript / TypeScript / Web
+[*.{js,mjs,cjs,ts,tsx,json,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# Kotlin / Gradle
+[*.{kt,kts,gradle}]
+indent_style = space
+indent_size = 4
+
+# Markdown: biarkan 2 spasi berturut (baris kosong agar rapi di GitHub)
+[*.md]
+trim_trailing_whitespace = false
+
+# Shell
+[*.sh]
+indent_style = space
+indent_size = 4
